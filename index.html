@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Secret 💗</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffd6e7, #e7d5ff, #d5f1ff);
+        font-family: Arial, sans-serif;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .box {
+        width: 90%;
+        max-width: 500px;
+        padding: 30px 20px;
+        background: rgba(255,255,255,0.88);
+        border-radius: 25px;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+    }
+
+    .screen {
+        display: none;
+        animation: appear 0.5s ease;
+    }
+
+    .screen.active {
+        display: block;
+    }
+
+    h1 {
+        color: #d94f91;
+        font-size: 28px;
+    }
+
+    p {
+        color: #555;
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    button {
+        border: none;
+        padding: 14px 24px;
+        margin-top: 18px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #ff72ad, #c875ff);
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(200,80,150,0.25);
+    }
+
+    button:active {
+        transform: scale(0.96);
+    }
+
+    .truth {
+        color: #d94f91;
+        font-weight: bold;
+        font-size: 22px;
+        margin-top: 20px;
+    }
+
+    .final {
+        font-size: 42px;
+        color: #ff4fa3;
+        font-weight: bold;
+        animation: pop 0.8s ease infinite alternate;
+    }
+
+    .heart {
+        position: fixed;
+        font-size: 25px;
+        pointer-events: none;
+        animation: fall 3s linear forwards;
+    }
+
+    @keyframes appear {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pop {
+        from {
+            transform: scale(1);
+        }
+        to {
+            transform: scale(1.08);
+        }
+    }
+
+    @keyframes fall {
+        from {
+            transform: translateY(-50px) rotate(0deg);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    .dots {
+        letter-spacing: 8px;
+        color: #d94f91;
+        font-size: 25px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <!-- 1 -->
+    <div class="screen active" id="screen1">
+        <h1>Welcome to the strangest world 🌷</h1>
+        <button onclick="next(2)">Continue</button>
+    </div>
+
+    <!-- 2 -->
+    <div class="screen" id="screen2">
+        <h1>You're still not scared? 👀</h1>
+        <button onclick="next(3)">I'm not scared</button>
+    </div>
+
+    <!-- 3 -->
+    <div class="screen" id="screen3">
+        <h1>You take full responsibility now. 😌</h1>
+        <button onclick="next(4)">I accept</button>
+    </div>
+
+    <!-- 4 -->
+    <div class="screen" id="screen4">
+        <p>
+            Since you made it this far, that means you're afraid of nothing.
+            <br><br>
+            Congratulations... because you're about to lose everything you know.
+            <br><br>
+            Everything you see around you is a lie.
+        </p>
+
+        <div class="truth">
+            The only truth is that Rahab loves you.
+        </div>
+
+        <button onclick="next(5)">Continue</button>
+    </div>
+
+    <!-- 5 -->
+    <div class="screen" id="screen5">
+        <p class="dots">. . . . . . .</p>
+
+        <h1>Do you really want to continue?</h1>
+
+        <button onclick="next(6)">Yes, continue</button>
+    </div>
+
+    <!-- 6 -->
+    <div class="screen" id="screen6">
+        <div class="final">
+            RAHAB LOVES<br>
+            YOUUUUUU 💗
+        </div>
+    </div>
+
+</div>
+
+<script>
+function next(number) {
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("screen" + number).classList.add("active");
+
+    if (number === 6) {
+        createHearts();
+    }
+}
+
+function createHearts() {
+    for (let i = 0; i < 60; i++) {
+        setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = ["💗","💖","💕","💘","❤️","💓"][Math.floor(Math.random() * 6)];
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = "-40px";
+            heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+            heart.style.fontSize = (18 + Math.random() * 25) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+
+        }, i * 50);
+    }
+}
+</script>
+
+</body>
+  </html>
